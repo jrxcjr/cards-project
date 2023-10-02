@@ -6,10 +6,9 @@ import (
 
 type deck []string
 
-// This function creates a new deck.
-// This does not need a receiver due to the fact
-// That this is creating a new object. By convention, it does not make a lot of sense to do so.
-
+// This function creates a new deck object.
+// This does not need a receiver because it is creating a new object
+// return @deck cards
 func newDeck() deck {
 	cards := deck{}
 
@@ -25,7 +24,7 @@ func newDeck() deck {
 	return cards
 }
 
-// This function prints all of the items in a deck
+// This function prints all of the items in a deck to the console
 func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
@@ -34,6 +33,12 @@ func (d deck) print() {
 
 // This function return two decks, one without the elements and one with the removed elements.
 // The return annotation, tells us the types of data that will be returned.
-func deal(d deck, handSize int) (deck, deck) {
-	return d[:handSize], d[handSize:]
+// return @hand deck
+// return @remainingCards deck
+func deal(d deck, handSize int) (hand deck, remainingCards deck) {
+
+	hand = d[:handSize]
+	remainingCards = d[handSize:]
+
+	return hand, remainingCards
 }
