@@ -31,3 +31,9 @@ func (d deck) print() {
 		fmt.Println(i, card)
 	}
 }
+
+// This function return two decks, one without the elements and one with the removed elements.
+// The return annotation, tells us the types of data that will be returned.
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}
