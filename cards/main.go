@@ -5,8 +5,7 @@ func main() {
 
 	//This invoke selects cards from the deck created above.
 
-	hand, remainingCards := deal(cards, 4)
+	//hand, remainingCards := deal(cards, 4)
 
-	hand.print()
-	remainingCards.print()
+	cards.saveToFile("my_cards")
 }

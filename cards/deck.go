@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strings"
 )
 
 type deck []string
@@ -41,4 +43,12 @@ func deal(d deck, handSize int) (hand deck, remainingCards deck) {
 	remainingCards = d[handSize:]
 
 	return hand, remainingCards
+}
+
+func (d deck) toString() string {
+	return strings.Join([]string(d), ",")
+}
+
+func (d deck) saveToFile(fileName string) error {
+	return os.WriteFile(fileName, []byte(d.toString()), 0666)
 }
