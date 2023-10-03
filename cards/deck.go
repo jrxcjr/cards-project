@@ -56,3 +56,22 @@ func (d deck) toFileByte() []byte {
 func (d deck) saveToFile(fileName string) error {
 	return os.WriteFile(fileName, d.toFileByte(), 0666)
 }
+
+func newDeckFromFile(filename string) deck {
+
+	bs, err := os.ReadFile(filename)
+
+	if err != nil {
+		//option 1- when that happens, we can printout a new deck and log the error.
+		//option 2 -Log the error and entirely quit the runtime execution.
+		fmt.Println("Error:", err)
+		//This kills the execution of a program
+		os.Exit(1)
+	}
+
+	//this got the byte slice and turned it back to a []strings
+	readByteSlice := strings.Split(string(bs), ",")
+
+	//the []string was then converted to a deck type
+	return deck(readByteSlice)
+}
