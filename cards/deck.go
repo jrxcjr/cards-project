@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -43,6 +45,27 @@ func deal(d deck, handSize int) (hand deck, remainingCards deck) {
 	remainingCards = d[handSize:]
 
 	return hand, remainingCards
+}
+
+// This function shuffles the deck by randomizing the
+func (d deck) shuffle() {
+
+	//The int64 seed that will be used to generate the randomness, can be further randomized by passing to the seed function, a amount of nanoseconds elapsed
+	//since the epoch, so, whenever we initialize the program, we get a new time (as more time has passed since the epoch) and a new seed number, thus improving randomization.
+	// to get truly random numbers, you need to create a new source of random numbers, that is created by calling this function below.
+	source := rand.NewSource(time.Now().UnixNano())
+
+	//A new source is then uploaded to a new instance of the Rand type, that will start generating the random numbers
+	r := rand.New(source)
+
+	for i := range d {
+		//len (d) - 1 returns the length of a slice.
+		//By pointing to the newly created Rand type, you can get truly random numbers
+		newPosition := r.Intn(len(d) - 1)
+
+		//This piece of code, lets you swap the item position on a slice, by telling the item, what is his new index.
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
 
 func (d deck) toString() string {
