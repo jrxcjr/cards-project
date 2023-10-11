@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	cards := newDeckFromFile("my_cards")
+	cards := newDeckFromFile("deck")
 	cards.shuffle()
 	//This invoke selects cards from the deck created above.
 
